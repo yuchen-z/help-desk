@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "node prisma/seed.ts",
-    "test": "jest __tests__/"
+    "test": "jest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

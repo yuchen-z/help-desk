@@ -1,4 +1,4 @@
-import { TicketForm } from "@/components/clientComponents/TicketForm/TicketForm";
+import TicketForm from "@/components/clientComponents/TicketForm/TicketForm";
 
 export default function Home() {
   return (
