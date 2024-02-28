@@ -2,9 +2,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
+import { X } from "lucide-react"
 import {
   Form,
   FormControl,
@@ -17,13 +17,11 @@ import {
 import { Input } from "@/components/ui/input"
 
 const formSchema = z.object({
-  // from: z.string().min(1).max(50),
-  // response: z.string().min(1).max(500),
-  from: z.string().max(50),
-  response: z.string().max(500),
+  from: z.string().min(1).max(50),
+  response: z.string().min(1).max(500),
 })
 
-export function ResponseForm({ row, onSubmitResponse, onClickCloseTicket }) {
+export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket, onClickClose }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,6 +31,10 @@ export function ResponseForm({ row, onSubmitResponse, onClickCloseTicket }) {
   })
  
   return (
+    <>
+    <Button aria-label="close-form" variant="ghost" size="icon" onClick={() => onClickClose()}>
+      <X className="h-4 w-4"/>
+    </Button>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmitResponse)} className="space-y-6 min-w-full">
         <FormField
@@ -64,9 +66,12 @@ export function ResponseForm({ row, onSubmitResponse, onClickCloseTicket }) {
             </FormItem>
           )}
         />
+        <div className="flex flex-row justify-between">
+        <Button variant="destructive" type="button" onClick={() => onClickCloseTicket()}>Close Ticket</Button>
         <Button type="submit">Submit</Button>
-        <Button type="button" onClick={() => onClickCloseTicket()}>Close Ticket</Button>
+        </div>
       </form>
     </Form>
+    </>
   )
 }

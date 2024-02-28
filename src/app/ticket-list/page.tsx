@@ -1,10 +1,10 @@
 'use client'
 import { useState, useEffect, ReactEventHandler } from "react"
-import DataTable from "./DataTable"
-import { ResponseForm } from "../ResponseForm/ResponseForm"
-import { Ticket, columns } from "./Columns"
+import DataTable from "../../components/clientComponents/TicketsList/DataTable"
+import ResponseForm  from "../../components/clientComponents/ResponseForm/ResponseForm"
+import { Ticket, columns } from "../../components/clientComponents/TicketsList/Columns"
 
-export default function TicketsList (){
+export default function TicketList (){
   const [tickets, setTickets] = useState([])
   const [selectedTicket, setSelectedTicket] = useState(null)
 
@@ -45,8 +45,7 @@ export default function TicketsList (){
           }
           return ticket
         })
-        console.log('update', updateTickets)
-        setTickets(updateTickets) //update ticket at specified id to response.status
+        setTickets(updateTickets) 
         setSelectedTicket(null)
       } catch (error) {
         console.error
@@ -76,14 +75,17 @@ export default function TicketsList (){
     }
     closeTicket()
   }
+
+  const onClickClose = () => setSelectedTicket(null)
   
   return (
-    <>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <h1>Tickets</h1>
       {selectedTicket == null ? 
       <DataTable columns={columns} data={tickets} onClickRow={onClickRow}/>
       :
-      <ResponseForm row={selectedTicket} onSubmitResponse={onSubmitResponse} onClickCloseTicket={onClickCloseTicket}/>
+      <ResponseForm row={selectedTicket} onClickClose={onClickClose} onSubmitResponse={onSubmitResponse} onClickCloseTicket={onClickCloseTicket}/>
       }
-    </>
+    </main>
   )
 }

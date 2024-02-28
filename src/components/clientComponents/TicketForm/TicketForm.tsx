@@ -3,17 +3,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { ticketFormSchema } from "@/lib/utils"
-
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
@@ -37,7 +34,17 @@ export default function TicketForm() {
           "method": "POST",
           "body": JSON.stringify({...values})
         })
-        const response = await post.json()
+        if (post.ok) {
+          form.reset({
+            name: "",
+            email: "",
+            description: ""
+          });
+          //TODO add UI for successful submission
+        } else {
+          //TODO add UI for error
+          console.error('Failed to submit ticket');
+        }
       } catch (error) {
         console.error
       }

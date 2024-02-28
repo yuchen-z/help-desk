@@ -76,34 +76,7 @@ export default function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="ml-auto">
-            Filter Col
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          {table
-            .getAllColumns()
-            .filter(
-              (column) => column.getCanHide()
-            )
-            .map((column) => {
-              return (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  className="capitalize"
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(value) =>
-                    column.toggleVisibility(!!value)
-                  }
-                >
-                  {column.id}
-                </DropdownMenuCheckboxItem>
-              )
-            })}
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <DataTableViewOptions table={table}/>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -168,11 +141,7 @@ export default function DataTable<TData, TValue>({
           Next
         </Button>
       </div>
-      <div className="flex-1 text-sm text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
-      </div>
-      <DataTableViewOptions table={table}/>
+
     </div>
   )
 }

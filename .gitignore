@@ -1,3 +1,6 @@
 node_modules
 .env
 .next
+coverage
+.swc
+.gitignore
