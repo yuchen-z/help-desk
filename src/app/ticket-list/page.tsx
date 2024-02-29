@@ -1,10 +1,12 @@
 'use client'
+import { z } from "zod"
 import { useState, useEffect} from "react"
 import DataTable from "../../components/clientComponents/TicketsList/DataTable"
 import ResponseForm  from "../../components/clientComponents/ResponseForm/ResponseForm"
 import { columns } from "../../components/clientComponents/TicketsList/Columns"
 import { Ticket } from "@/lib/types"
 import { Row } from "@tanstack/react-table"
+import { formSchema } from "@/lib/utils"
 
 export default function TicketList (){
   const [tickets, setTickets] = useState<Ticket[]>([])
@@ -28,7 +30,7 @@ export default function TicketList (){
     setSelectedTicket(row)
   }
 
-  const onSubmitResponse = () => {
+  const onSubmitResponse = (data: z.infer<typeof formSchema>) => {
     if (!selectedTicket) return
     const patchTicket = async () => {
       try {
@@ -39,6 +41,7 @@ export default function TicketList (){
           "method": "PATCH"
         })
         const response = await patch.json()
+        console.log('submitted ticket response', data)
         const updateTickets = tickets.map(ticket => {
           if (ticket.id === response.id){
             ticket.status = response.status

@@ -9,7 +9,7 @@ export type Ticket = {
 
 interface ResponseFormProps {
   row: Row<Ticket>,
-  onSubmitResponse: () => void,
+  onSubmitResponse: (data) => void,
   onClickCloseTicket: () => void,
   onClickClose: () => void,
 }

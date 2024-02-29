@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { formSchema } from "@/lib/utils"
 import { ResponseFormProps } from "@/lib/types"
+import { SubmitHandler } from "react-hook-form"
 
 export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket, onClickClose }: ResponseFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -26,6 +27,7 @@ export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket
       response: ""
     },
   })
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => onSubmitResponse(data)
  
   return (
     <>
@@ -33,7 +35,7 @@ export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket
       <X className="h-4 w-4"/>
     </Button>
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmitResponse)} className="space-y-6 min-w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 min-w-full">
         <FormField
           control={form.control}
           name="from"
