@@ -15,13 +15,10 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { formSchema } from "@/lib/utils"
+import { ResponseFormProps } from "@/lib/types"
 
-const formSchema = z.object({
-  from: z.string().min(1).max(50),
-  response: z.string().min(1).max(500),
-})
-
-export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket, onClickClose }) {
+export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket, onClickClose }: ResponseFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

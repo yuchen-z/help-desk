@@ -1,6 +1,5 @@
 "use client"
 import {
-  ColumnDef,
   VisibilityState,
   ColumnFiltersState,
   flexRender,
@@ -19,23 +18,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ReactEventHandler, useState } from "react"
+import { useState } from "react"
 import { DataTableViewOptions } from "./DataTableViewOptions"
-
-
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[],
-  onClickRow: Function,
-}
+import { DataTableProps } from "@/lib/types"
 
 export default function DataTable<TData, TValue>({
   columns,
@@ -141,7 +128,6 @@ export default function DataTable<TData, TValue>({
           Next
         </Button>
       </div>
-
     </div>
   )
 }

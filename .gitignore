@@ -4,3 +4,4 @@ node_modules
 coverage
 .swc
 .gitignore
+Dockerfile.dev.dockerignore

@@ -1,12 +1,14 @@
 'use client'
-import { useState, useEffect, ReactEventHandler } from "react"
+import { useState, useEffect} from "react"
 import DataTable from "../../components/clientComponents/TicketsList/DataTable"
 import ResponseForm  from "../../components/clientComponents/ResponseForm/ResponseForm"
-import { Ticket, columns } from "../../components/clientComponents/TicketsList/Columns"
+import { columns } from "../../components/clientComponents/TicketsList/Columns"
+import { Ticket } from "@/lib/types"
+import { Row } from "@tanstack/react-table"
 
 export default function TicketList (){
-  const [tickets, setTickets] = useState([])
-  const [selectedTicket, setSelectedTicket] = useState(null)
+  const [tickets, setTickets] = useState<Ticket[]>([])
+  const [selectedTicket, setSelectedTicket] = useState<Row<Ticket> | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,19 +17,19 @@ export default function TicketList (){
           "Content-Type": "application/json"
         }
       })
-      const ticketData = await data.json()
+      const ticketData : Ticket[] = await data.json()
       const activeTickets = ticketData.filter(ticket => ticket.status !== 'CLOSE')
       setTickets(activeTickets)
     }
     fetchData()
   }, [])
 
-  const onClickRow = (row) => {
+  const onClickRow = (row: Row<Ticket>) => {
     setSelectedTicket(row)
   }
 
   const onSubmitResponse = () => {
-    console.log('selected Ticket', selectedTicket)
+    if (!selectedTicket) return
     const patchTicket = async () => {
       try {
         const patch = await fetch (`/api/ticket/${selectedTicket.original.id}`, {
@@ -37,8 +39,6 @@ export default function TicketList (){
           "method": "PATCH"
         })
         const response = await patch.json()
-        console.log('tickets after patch', tickets)
-        console.log('patch response', response)
         const updateTickets = tickets.map(ticket => {
           if (ticket.id === response.id){
             ticket.status = response.status
@@ -56,6 +56,7 @@ export default function TicketList (){
   }
 
   const onClickCloseTicket = () => {
+    if (!selectedTicket) return;
     const closeTicket = async () => {
       try {
         const close = await fetch (`/api/ticket/${selectedTicket.original.id}`, {

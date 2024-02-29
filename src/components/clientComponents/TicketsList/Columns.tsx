@@ -1,74 +1,10 @@
 "use client"
-
+import { Ticket } from "@/lib/types"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export type Ticket = {
-  id: number
-  name: string
-  email: string
-  description: string,
-  date: Date,
-  status: "open" | "in_progress" | "closed"
-}
-
 export const columns: ColumnDef<Ticket>[] = [
-  //CHECKBOX
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
-
-  //DROPDOWN ACTIONS
-  // {
-  //   id: "actions",
-  //   cell: ({ row }) => {
-  //     const ticket = row.original
- 
-  //     return (
-  //       <DropdownMenu>
-  //         <DropdownMenuTrigger asChild>
-  //           <Button variant="ghost" className="h-8 w-8 p-0">
-  //             <span className="sr-only">Open menu</span>
-  //             <MoreHorizontal className="h-4 w-4" />
-  //           </Button>
-  //         </DropdownMenuTrigger>
-  //         <DropdownMenuContent align="end">
-  //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-  //           <DropdownMenuItem
-  //             onClick={() => navigator.clipboard.writeText(ticket.id)}
-  //           >
-  //             Copy payment ID
-  //           </DropdownMenuItem>
-  //           <DropdownMenuSeparator />
-  //           <DropdownMenuItem>View customer</DropdownMenuItem>
-  //           <DropdownMenuItem>View payment details</DropdownMenuItem>
-  //         </DropdownMenuContent>
-  //       </DropdownMenu>
-  //     )
-  //   },
-  // },
-
-  //ID
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -87,8 +23,6 @@ export const columns: ColumnDef<Ticket>[] = [
       return <div className="text-sm text-center">{id}</div>
     },
   },
-
-  //NAME
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -108,8 +42,6 @@ export const columns: ColumnDef<Ticket>[] = [
       return <div className="text-sm">{previewText}</div>
     },
   },
-
-  //EMAIL
   {
     accessorKey: "email",
     header: ({ column }) => {
@@ -128,8 +60,6 @@ export const columns: ColumnDef<Ticket>[] = [
       return <div className="text-sm">{previewText}</div>
     },
   },
-
-  //DESCRIPTION
   {
     accessorKey: "description",
     header: "Description",
@@ -138,8 +68,6 @@ export const columns: ColumnDef<Ticket>[] = [
       return <div className="text-sm">{previewText}</div>
     },
   },
-
-  //DATE
   {
     accessorKey: "updatedAt",
     header: ({ column }) => {
@@ -160,8 +88,6 @@ export const columns: ColumnDef<Ticket>[] = [
       return <div className="text-sm text-center">{formattedDate}</div>
     },
   },
-
-  //STATUS
   {
     accessorKey: "status",
     header: ({ column }) => {
@@ -179,6 +105,5 @@ export const columns: ColumnDef<Ticket>[] = [
       const text = row.original.status
       return <div className="text-sm text-center">{text}</div>
     },
-
   },
 ]

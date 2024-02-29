@@ -11,3 +11,8 @@ export const ticketFormSchema = z.object({
   email: z.string().email(),
   description: z.string().min(1).max(500)
 })
+
+export const formSchema = z.object({
+  from: z.string().min(1).max(50),
+  response: z.string().min(1).max(500),
+})

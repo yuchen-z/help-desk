@@ -28,7 +28,10 @@ describe('DataTable', () => {
 
   it('sorts columns when headers are clicked', async () => {
     await userEvent.click(screen.getByRole('button', { name: /ID/ }));
-    const sortedIds = screen.getAllByRole('cell', { name: /^\d+$/ }).map(cell => parseInt(cell.textContent, 10));
+    const sortedIds = screen.getAllByRole('cell', { name: /^\d+$/ }).map(cell => {
+      if (cell.textContent === null) throw new Error("Cell textContent is null");
+      return parseInt(cell.textContent, 10);
+    });
     const isAscending = sortedIds.every((val, i, arr) => !i || (val >= arr[i - 1]));
     expect(isAscending).toBe(true);
   })
