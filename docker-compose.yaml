@@ -1,18 +1,18 @@
 version: "3.8"
 services:
-  # main:
-  #   build:
-  #     context: ./
-  #     dockerfile: Dockerfile.dev
-  #   ports:
-  #     - 3000:3000
-  #   environment:
-  #     - DATABASE_URL=postgresql://admin:admin@postgres:5432/help-desk
-  #   volumes:
-  #     - ./:/usr/src/app
-  #     - node_modules:/usr/src/app/node_modules/
-  #   depends_on:
-  #     - postgres
+  main:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    environment:
+      - DATABASE_URL=postgresql://admin:admin@postgres:5432/help-desk
+    volumes:
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules/
+    depends_on:
+      - postgres
 
   postgres:
     image: postgres:16.0-alpine3.18
