@@ -23,7 +23,7 @@ export default function TicketForm() {
       name: "",
       email:"",
       description:""
-    },
+    }
   })
  
   function onSubmit(values: z.infer<typeof ticketFormSchema>) {
@@ -52,7 +52,6 @@ export default function TicketForm() {
             description: "Please try again",
             variant: "destructive"
           })
-          console.error('Failed to submit ticket');
         }
       } catch (error) {
         console.error(error)
@@ -63,6 +62,9 @@ export default function TicketForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 min-w-full font-light">
+      <FormItem>
+
+            </FormItem>
         <FormField
           control={form.control}
           name="name"
@@ -82,7 +84,7 @@ export default function TicketForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Email..." {...field} onClick={() => toast({description:'email input'})} className="bg-white"/>
+                <Input placeholder="Email..." {...field} className="bg-white"/>
               </FormControl>
             </FormItem>
           )}
