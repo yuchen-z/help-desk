@@ -21,18 +21,6 @@ describe('TicketForm', () => {
     expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
   });
 
-  //TODO
-  //form validation
-  // it('does not call API and displays an error message on invalid form input', async () => {
-
-  //   const emailInput = screen.getByLabelText(/email/i);
-  //   fireEvent.change(emailInput, { target: { value: 'invalid-email' } });
-  //   fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
-    
-  //   // Assuming you display error messages for invalid fields
-  //   expect(await screen.findByText(/invalid/i)).toBeInTheDocument();
-  // });
-
   it('calls the API and resets form on successful submission', async () => {
     const mockValidData = {
       name: 'Janet',

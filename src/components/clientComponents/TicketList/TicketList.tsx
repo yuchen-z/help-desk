@@ -33,7 +33,7 @@ export default function TicketList (){
       })
       console.log('submitted ticket response', data)
     } catch (error){
-      console.error
+      console.error(error)
       setSelectedTicket(null)
     }
   }

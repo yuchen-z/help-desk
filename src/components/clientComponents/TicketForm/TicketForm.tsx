@@ -47,7 +47,11 @@ export default function TicketForm() {
             description: "Go to the ticket-list page to see your ticket"
           })
         } else {
-          //TODO add UI for error
+          toast({
+            title: "Failed to submit ticket",
+            description: "Please try again",
+            variant: "destructive"
+          })
           console.error('Failed to submit ticket');
         }
       } catch (error) {

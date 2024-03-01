@@ -2,13 +2,9 @@ import { NextResponse } from 'next/server';
 import { ticketFormSchema } from '@/lib/utils';
 import prisma from '../../../../prisma/prisma';
 
-
-
 export async function POST(req: Request){
   const body = await req.json()
-  console.log('request body', body)
   const {name, email, description} = ticketFormSchema.parse(body)
-  console.log('parsed info', name, email, description)
   try {
     const newTicket = await prisma.ticket.create({
       data: {
