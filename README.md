@@ -1,25 +1,37 @@
-## Getting Started
+# Getting Started
 
-First, run the development server:
+To run the app locally, spin up the docker containers command below, view the app at localhost:3000
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```js
+docker-compose up
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# The Help Desk App
+## Basic Features
+### Ticket Submission
+- Users can submit tickets on the home page which can be viewed on the Ticket-List page
+- Form values are validated with Zod on the client side and server side. Invalid client-side input is highlighted through the UI visually and will redirect user to the invalid input. Invalid server-side input to the ‘api/ticket’ endpoint will throw an error
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Ticket List
+- The ticket list is set up as a table, users can:
+    - Sort name, email, date, and status columns
+    - Search by description
+    - Hide columns for a cleaner display
+    - Edit ticket by click on a row to pull a response form
+- The ticket list currently displays all tickets in the database. A planned feature would be a separation of active tickets (open or in-progress) from archived tickets (closed)
+- If a ticket has been edited by another user, a warning will be displayed to the user that the current ticket they are editing is out of sync. See roadmapped features for plans to synchronize the ticket-list UI with the latest database info
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Roadmapped Features
+### Authorization
+- Crucial next steps include implementing authorization which would allow the following additional features to be added:
+    - Allow a registered users to be associated with a submitted ticket
+    - Limit viewing support tickets to authorized reviewers
+    - Allow registered users to view a history of their submitted tickets
 
-## Deploy on Vercel
+### Syncing Database with User Interface
+- Ideally the ticket-reviewers should have access to the latest information from the database. Ticket-reviewers should also be able to have notifications about new ticket responses or incoming tickets. A future proposal would be implement server sent events to allow realtime data to be streamed from the server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Additional UI Features
+- Improve response form to allow ticket-reviewers to have a communication thread allowing users and reviewers to review past email communication regarding the ticket
+- Adding checkboxes to the ticket list to allow multiple tickets to be edited at once
+- Ability to prioritize and add notes to tickets
