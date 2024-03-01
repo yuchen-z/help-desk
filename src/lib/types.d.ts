@@ -23,3 +23,10 @@ interface DataTableProps<TData, TValue> {
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>
 }
+
+interface TicketStore {
+  tickets: Ticket[];
+  selectedTicket: Row <Ticket> | null;
+  setTickets: (tickets: Ticket[]) => void;
+  setSelectedTicket: (row: Row <Ticket> ) => void;
+}

@@ -30,8 +30,8 @@ export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => onSubmitResponse(data)
  
   return (
-    <>
-    <Button aria-label="close-form" variant="ghost" size="icon" onClick={() => onClickClose()}>
+    <div className="flex flex-col items-center">
+    <Button className="self-end" aria-label="close-form" variant="ghost" size="icon" onClick={() => onClickClose()}>
       <X className="h-4 w-4"/>
     </Button>
     <Form {...form}>
@@ -43,7 +43,7 @@ export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket
             <FormItem>
               <FormLabel>From</FormLabel>
               <FormControl>
-                <Input placeholder="From..." {...field} />
+                <Input placeholder="From..." {...field} className="bg-white"/>
               </FormControl>
             </FormItem>
           )}
@@ -57,7 +57,7 @@ export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket
               <FormControl>
                 <Textarea
                   placeholder="Respond to ticket here"
-                  className="resize-none"
+                  className="resize-none bg-white h-40"
                   {...field}
                 />
               </FormControl>
@@ -71,6 +71,6 @@ export default function ResponseForm({ row, onSubmitResponse, onClickCloseTicket
         </div>
       </form>
     </Form>
-    </>
+    </div>
   )
 }

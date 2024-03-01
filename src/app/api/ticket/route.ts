@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { ticketFormSchema } from '@/lib/utils';
-import prisma from '@/lib/prisma';
+import prisma from '../../../../prisma/prisma';
 
 
 

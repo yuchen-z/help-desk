@@ -13,8 +13,10 @@ import {
   FormLabel,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function TicketForm() {
+  const { toast } = useToast()
   const form = useForm<z.infer<typeof ticketFormSchema>>({
     resolver: zodResolver(ticketFormSchema),
     defaultValues: {
@@ -40,20 +42,23 @@ export default function TicketForm() {
             email: "",
             description: ""
           });
-          //TODO add UI for successful submission
+          toast({
+            title: "Ticket Successfully Submitted",
+            description: "Go to the ticket-list page to see your ticket"
+          })
         } else {
           //TODO add UI for error
           console.error('Failed to submit ticket');
         }
       } catch (error) {
-        console.error
+        console.error(error)
       }
     }
     postTicket()
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 min-w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 min-w-full font-light">
         <FormField
           control={form.control}
           name="name"
@@ -61,7 +66,7 @@ export default function TicketForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Name..." {...field} />
+                <Input placeholder="Name..." {...field} className="bg-white"/>
               </FormControl>
             </FormItem>
           )}
@@ -73,7 +78,7 @@ export default function TicketForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Email..." {...field} />
+                <Input placeholder="Email..." {...field} onClick={() => toast({description:'email input'})} className="bg-white"/>
               </FormControl>
             </FormItem>
           )}
@@ -87,15 +92,15 @@ export default function TicketForm() {
               <FormControl>
                 <Textarea
                   placeholder="Share your thoughts with Zealthy"
-                  className="resize-none"
+                  className="resize-none bg-white h-32"
                   {...field}
                 />
               </FormControl>
-              <small>500 char max</small>
+              <small className="font-light">500 char max</small>
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button className="float-right" type="submit">Submit</Button>
       </form>
     </Form>
   )

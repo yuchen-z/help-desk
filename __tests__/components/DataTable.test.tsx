@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import {within} from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
-import DataTable from '@/components/clientComponents/TicketsList/DataTable';
-import { columns } from '@/components/clientComponents/TicketsList/Columns';
+import DataTable from '@/components/clientComponents/DataTable/DataTable';
+import { columns } from '@/constants/columns';
 
 const mockData = [
   { id: 1, name: 'John Doe', email: 'john@example.com', description: 'Issues', date: new Date(), status: 'open' },

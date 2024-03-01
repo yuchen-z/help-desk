@@ -54,18 +54,18 @@ export default function DataTable<TData, TValue>({
  
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 w-min-full">
         <Input
           placeholder="Filter description..."
           value={(table.getColumn("description")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("description")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-sm bg-white"
         />
       <DataTableViewOptions table={table}/>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border bg-white">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

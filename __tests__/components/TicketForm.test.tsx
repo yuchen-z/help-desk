@@ -73,13 +73,3 @@ describe('TicketForm', () => {
     })
   });
 });
-
-//TODO delete
-// Integration - Submit Ticket
-// input data into ticket form
-// Check that after a while it is visible on the admin dashboard with status open and correct date
-
-// Integration - Response Form
-//integration test would be if I input janet, janet@email.com, janet's problem, it should show up on the dashboard
-// input ticket, then check ticket is logged
-// Close form, check fetch input and that the row is not visible 
