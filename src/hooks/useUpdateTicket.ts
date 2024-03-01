@@ -6,10 +6,7 @@ export default function useUpdateTicket(){
   const updateTicket = async (ticketId: number, method: 'PATCH' | 'DELETE') => {
     const response = await axios({
       method: method,
-      url: `/api/ticket/${ticketId}`,
-      data: {
-        status: method === 'DELETE'? 'CLOSED' : 'IN_PROGRESS'
-      }
+      url: `/api/ticket/${ticketId}`
     })
       const updateTickets = tickets.map(ticket => {
         if (ticket.id === response.data.id){

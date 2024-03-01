@@ -11,10 +11,12 @@ import { useToast } from "@/components/ui/use-toast"
 import useTickets from "@/hooks/useTickets"
 import useUpdateTicket from "@/hooks/useUpdateTicket"
 import { useTicketStore } from "@/hooks/useTicketStore"
+import useTicket from "@/hooks/useTicket"
 
 export default function TicketList (){
   const { error, isLoading } = useTickets()
   const { updateTicket } = useUpdateTicket()
+  const { getTicket } = useTicket()
   const { toast } = useToast()
   const { tickets, selectedTicket, setSelectedTicket } = useTicketStore()
 
@@ -50,13 +52,25 @@ export default function TicketList (){
     }
   }
   
+  const onClickRow = async (row: Row<Ticket>) => {
+    const ticket = await getTicket(row.original.id)
+    if (ticket.status !== row.original.status){
+      toast({
+        title: 'This ticket is out of sync',
+        description: 'We recommend refreshing the page to to use the latest ticket info',
+        variant: "destructive"
+      })
+    }
+    setSelectedTicket(row)
+  }
+
   return (
     <div className="w-9/12">
       {selectedTicket == null ? 
       <DataTable 
         columns={columns} 
         data={tickets} 
-        onClickRow={(row: Row<Ticket>) => { setSelectedTicket(row)}}/>
+        onClickRow={onClickRow}/>
       :
       <ResponseForm 
         row={selectedTicket} 

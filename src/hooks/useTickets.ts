@@ -13,8 +13,7 @@ function useTickets() {
         const response = await axios.get('api/ticket', {
           responseType: 'json',
         })  
-        const data = await response.data
-        setTickets(data)
+        setTickets(response.data)
       } catch (error){
         if (axios.isAxiosError(error)) setError(error)
         else (setError(new Error('unable to get tickets')))
