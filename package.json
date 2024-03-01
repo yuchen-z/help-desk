@@ -9,7 +9,7 @@
     "lint": "next lint",
     "seed": "node prisma/seed.ts",
     "test": "jest",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && scripts/start-and-migrate.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
